@@ -1,8 +1,8 @@
-if SHIELD_OLIK_LEFT
+if SHIELD_OLIK_RIGHT
 
 # Name must be less than 16 characters long!
 config ZMK_KEYBOARD_NAME
-    default "olik"
+    default "O.L.I.K"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
@@ -18,11 +18,17 @@ config BT_MAX_PAIRED
 
 endif
 
+
+if SHIELD_OLIK_LEFT
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default n
+endif
+
 if SHIELD_OLIK_LEFT || SHIELD_OLIK_RIGHT
 
 config ZMK_SPLIT
     default y
-
 endif
 
 # ---------------------

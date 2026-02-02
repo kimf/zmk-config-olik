@@ -46,8 +46,8 @@
 		reg = <0x3c>;
 		width = <128>;
 		height = <32>;
-		/* Rotate UI for portrait-mounted 0.91" panel. */
-		rotation = <270>;
+		/* Some 0.91" panels need a 2-column offset. */
+		segment-offset = <2>;
 		
 		segment-offset = <0>;
 		page-offset = <0>;

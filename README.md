@@ -73,3 +73,34 @@ Commit: a18ba60304e44de9bbf35eb3d70a8d8ba4e8c49a
 ```
 
 </details>
+
+
+
+---
+
+mkdir -p ~/zmk-workspace
+cd ~/zmk-workspace
+python3 -m pip install --user west
+west init -l ~/projects/keebs/olik/zmk-config-olik/config
+west update
+west zephyr-export
+python3 -m pip install --user -r zephyr/scripts/requirements.txt
+
+
+# left
+west build -s zmk/app -d build/olik_left -b nice_nano_v2 -- \
+  -DSHIELD=olik_left \
+  -DZMK_CONFIG=/Users/kimf/projects/keebs/olik/zmk-config-olik/config \
+  -DSNIPPET=zmk-usb-logging
+
+# right
+west build -s zmk/app -d build/olik_right -b nice_nano_v2 -- \
+  -DSHIELD=olik_right \
+  -DZMK_CONFIG=/Users/kimf/projects/keebs/olik/zmk-config-olik/config \
+  -DSNIPPET="studio-rpc-usb-uart;zmk-usb-logging" \
+  -DCONFIG_ZMK_STUDIO=y
+
+# settings reset
+west build -s zmk/app -d build/settings_reset -b nice_nano_v2 -- \
+  -DSHIELD=settings_reset \
+  -DZMK_CONFIG=/Users/kimf/projects/keebs/olik/zmk-config-olik/config

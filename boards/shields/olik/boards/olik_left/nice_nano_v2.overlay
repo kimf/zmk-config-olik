@@ -45,17 +45,19 @@
 		compatible = "solomon,ssd1306fb";
 		reg = <0x3c>;
 		width = <128>;
-		height = <64>;
+		height = <32>;
+		/* Rotate UI for portrait-mounted 0.91" panel. */
+		rotation = <270>;
 		
 		segment-offset = <0>;
 		page-offset = <0>;
 		display-offset = <0>;
+		/* 128x32 panels use a 31 mux ratio and sequential COM pins. */
 		multiplex-ratio = <31>;
 		prechargep = <0x22>;
 		segment-remap;
 		com-invdir;
 		com-sequential;
-		inversion-on;
 	};
 };
 / {

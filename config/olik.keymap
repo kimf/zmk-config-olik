@@ -46,7 +46,7 @@
 		
 		
 		open_croc_td: open_croc_td {
-			compatible = "zmk,behavior-macro";
+			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
 			bindings
@@ -54,7 +54,7 @@
 		};
 		
 		close_croc_td: close_croc_td {
-			compatible = "zmk,behavior-macro";
+			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
 			bindings
@@ -62,7 +62,7 @@
 		};
 		
 		lpar_td: lpar_td {
-			compatible = "zmk,behavior-macro";
+			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
 			bindings
@@ -70,7 +70,7 @@
 		};
 		
 		lbkt_td: lbkt_td {
-			compatible = "zmk,behavior-macro";
+			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
 			bindings
@@ -78,7 +78,7 @@
 		};
 		
 		lbrc_td: lbrc_td {
-			compatible = "zmk,behavior-macro";
+			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
 			bindings

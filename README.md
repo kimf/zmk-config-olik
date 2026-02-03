@@ -12,6 +12,11 @@
 Built around the Swedish concept of **Lagom** (not too much, not too little, just right), the OLIK 47 avoids extreme minimalism in favor of practicality. It features a dedicated arrow cluster, a rotary encoder, and a tilted "wedge" profile for ergonomic comfort without complex adjustable legs.
 
 
+![OLIK](assets/images/PXL_20260203_224618944.MP.jpg)
+
+
+More images, and stl/step files in the assets folder!
+
 ## 🇸🇪 The Philosophy
 
 Most split keyboards try to be perfectly symmetrical. The **OLIK** acknowledges that our needs for the left and right hands are often different.
@@ -35,8 +40,8 @@ Most split keyboards try to be perfectly symmetrical. The **OLIK** acknowledges 
 
 * [x] **Design & CAD:** Completed.
 * [x] **3D Printing:** Completed.
-* [ ] **Wiring:** In progress.
-* [ ] **Firmware:** In progress.
+* [x] **Wiring:** Completed.
+* [x] **Firmware:** Completed.
 
 ## 🛠️ Build Guide
 

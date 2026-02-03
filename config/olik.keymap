@@ -1,21 +1,172 @@
+// Define scroll speed before including pointing header
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 240// default: 600 - controls smooth scroll sensitivity
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 12
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <locale/keys_se.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <locale/keys_sv.h>
 
 / {
 	
 	behaviors {
+		// Mouse scroll encoder behavior with proper timing
+		encoder_scroll: encoder_scroll {
+			compatible = "zmk,behavior-sensor-rotate";
+			#sensor-binding-cells = <0>;
+			bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+			
+			tap-ms = <50>;// Increased from 20 to 50 for better detection
+		};
+		
+		// Alternative scroll behavior using MOVE values (for smooth scrolling)
+		encoder_scroll_alt: encoder_scroll_alt {
+			compatible = "zmk,behavior-sensor-rotate";
+			#sensor-binding-cells = <0>;
+			bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
+			
+			tap-ms = <50>;
+		};
+		
+		
+		at_gmail_td: at_gmail_td {
+			compatible = "zmk,behavior-tap-dance";
+			#binding-cells = <0>;
+			tapping-term-ms = <200>;
+			bindings = <&kp SV_AT>, <&macro_gmail>;
+		};
+		
+		tilde_home_td: tilde_home_td {
+			compatible = "zmk,behavior-tap-dance";
+			#binding-cells = <0>;
+			tapping-term-ms = <200>;
+			bindings = <&kp SV_TILDE>, <&macro_tilde_home>;
+		};
+		
+		
+		open_croc_td: open_croc_td {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LT &macro_open_close_croc>;
+		};
+		
+		close_croc_td: close_croc_td {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_GT &macro_close_croc>;
+		};
+		
+		lpar_td: lpar_td {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LPAR &macro_lpar>;
+		};
+		
+		lbkt_td: lbkt_td {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LBKT &macro_lbkt>;
+		};
+		
+		lbrc_td: lbrc_td {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LBRC &macro_lbrc>;
+		};
+		
+		shift_td: shift_td {
+			compatible = "zmk,behavior-tap-dance";
+			#binding-cells = <0>;
+			tapping-term-ms = <250>;
+			bindings = <&kp LSHIFT>, <&sk LSHIFT>, <&caps_word>;
+		};
 	};
 	
 	macros {
 		macro_pa: macro_pa {
+			/* Outputs: "på". */
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			bindings
-			= <&macro_press &kp SWE_P &kp SWE_A_RING>
-			;
-		}
+			= <&kp SV_P &kp SV_A_RING>;
+		};
+		
+		macro_kim_fransman: macro_kim_fransman {
+			/* Outputs: "kim.fransman". */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp K &kp I &kp M &kp DOT &kp F &kp R &kp A &kp N &kp S &kp M &kp A &kp N>;
+		};
+		
+		macro_readly: macro_readly {
+			/* Outputs: "@readly.com". */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_AT &kp R &kp E &kp A &kp D &kp L &kp Y &kp DOT &kp C &kp O &kp M>;
+		};
+		
+		macro_gmail: macro_gmail {
+			/* Outputs: "@gmail.com". */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_AT &kp G &kp M &kp A &kp I &kp L &kp DOT &kp C &kp O &kp M>;
+		};
+		
+		macro_tilde_home: macro_tilde_home {
+			/* Outputs: "~/". */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_TILDE &kp SV_SLASH>;
+		};
+		
+		macro_open_close_croc: macro_open_close_croc {
+			/* Outputs: "</>" and moves cursor between "/" and ">". */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LT &kp SV_FSLH &kp SV_GT &kp LEFT>;
+		};
+		
+		macro_close_croc: macro_close_croc {
+			/* Outputs: "/>". */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_FSLH &kp SV_GT>;
+		};
+		
+		
+		macro_lpar: macro_lpar {
+			/* Outputs: "()" and moves cursor inside. */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LPAR &kp SV_RPAR &kp LEFT>;
+		};
+		macro_lbkt: macro_lbkt {
+			/* Outputs: "[]" and moves cursor inside. */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LBKT &kp SV_RBKT &kp LEFT>;
+		};
+		macro_lbrc: macro_lbrc {
+		/* Outputs: "{}" and moves cursor inside. */
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings
+			= <&kp SV_LBRC &kp SV_RBRC &kp LEFT>;
+		};
 	};
 	
 	combos {
@@ -24,15 +175,36 @@
 		combo_aring {
 			/* Ö + Ä => Å. */
 			timeout-ms = <200>;
-			key-positions = <22 23>;
-			bindings = <&kp SWE_A_RING>;
+			key-positions = <23 24>;
+			bindings = <&kp SV_A_RING>;
 		};
 		
 		combo_pa {
 			/* P + Ö => PÅ. */
 			timeout-ms = <200>;
-			key-positions = <22 23>;
+			key-positions = <10 23>;
 			bindings = <&macro_pa>;
+		};
+		
+		combo_email_username {
+			/* I + K => kim.fransman. */
+			timeout-ms = <200>;
+			key-positions = <8 21>;
+			bindings = <&macro_kim_fransman>;
+		};
+		
+		combo_readly_com {
+			/* R + E => readly.com. */
+			timeout-ms = <200>;
+			key-positions = <3 4>;
+			bindings = <&macro_readly>;
+		};
+		
+		combo_gmail_com {
+			/* G + M => gmail.com. */
+			timeout-ms = <200>;
+			key-positions = <17 31>;
+			bindings = <&macro_gmail>;
 		};
 	};
 	
@@ -41,63 +213,75 @@
 		compatible = "zmk,keymap";
 		
 		// -----------------------------------------------------------------------------------------
-		// | ESC   |  Q   |  W   |  E   |  R   |  T   |       |  Y   |  U   |  I   |  O   |  P   | BSPC |
-		// | TAB   |  A   |  S   |  D   |  F   |  G   | PLAY  |  H   |  J   |  K   |  L   |  Ö   |  Ä   |
-		// |       |  Z   |  X   |  C   |  V   |  B   |       |  N   |  M   |  ,   |  .   |  UP  |  -   |
-		// | SHIFT |  MEH | HYPER|      |      |      |       |      |      |      | LEFT | DOWN | RIGHT|
-		//                      | ALT | GUI | SPACE (LOWER) |   | SPACE (RAISE) | ENTER | SHIFT |
+		// | ESC   |  Q    |  W   |  E   |  R   |  T   |                 |  Y   |  U   |  I   |  O   |  P   | BSPC |
+		// | TAB   |  A    |  S   |  D   |  F   |  G   |     PLAY/PAUSE  |  H   |  J   |  K   |  L   |  Ö   |  Ä   |
+		// |       |  Z    |  X   |  C   |  V   |  B   |                 |  N   |  M   |  ,   |  .   |  UP  |  -   |
+		// | SHIFT |  CTRL | '                                                                  LEFT | DOWN | RIGHT|
+		//                     ALT | GUI | SPACE (SYM) |                 | SPACE (NUM) | ENTER | CTRL
 		default_layer {
 			display-name = "Base";
 			bindings = <
-			&kp ESCAPE        &kp Q             &kp W             &kp E             &kp R             &kp T                           &kp Y             &kp U             &kp I             &kp O             &kp P             &kp BACKSPACE
-			&kp TAB           &kp A             &kp S             &kp D             &kp F             &kp G             &kp C_PLAY_PAUSE &kp H             &kp J             &kp K             &kp L             &kp SV_O_UMLAUT         &kp SV_A_UMLAUT
-			&kp Z             &kp X             &kp C             &kp V             &kp B                           &kp N             &kp M             &kp COMMA         &kp DOT           &kp UP            &kp MINUS
-			&kp LEFT_SHIFT    &bt BT_CLR_ALL  	&kp LS(LA(LC(LGUI)))                                                               &kp LEFT          &kp DOWN          &kp RIGHT
-			&kp LEFT_ALT      &kp LEFT_GUI       &lt 1 SPACE        &lt 2 SPACE        &kp ENTER         &kp LEFT_SHIFT
+			&mt LC(LGUI) ESCAPE		&kp Q             &kp W             &kp E             &kp R             &kp T                           &kp Y             &kp U             &kp I             &kp O             &kp P             &kp BACKSPACE
+			&kp TAB           		&kp A             &kp S             &kp D             &kp F             &kp G    &kp C_PLAY_PAUSE 			&kp H             &kp J             &kp K             &kp L             &kp SV_O_UMLAUT   &kp SV_A_UMLAUT
+			&kp Z             		&kp X             &kp C             &kp V             &kp B                           									&kp N             &kp M             &kp COMMA         &kp DOT           &kp UP            &kp SV_MINUS
+			&shift_td        		  &kp LEFT_CTRL  		&kp SQT                                                         																				                  &kp LEFT          &kp DOWN          &kp RIGHT
+			&kp LEFT_ALT      		&kp LEFT_GUI      &lt 1 SPACE                                                                           &lt 2 SPACE        &mt LSHFT ENTER         &kp LEFT_CTRL
 			>;
 			
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>
-		};
-		
-		sym {
-			bindings = <
-			&trans  &kp SV_EXCL  &kp SV_DQT  &kp SV_POUND  &kp SV_DLLR  &kp SV_PRCNT          &kp SV_AMPS  &kp SV_LPAR  &kp SV_RPAR  &kp SV_EQUAL  &kp SV_PLUS  &trans
-			&trans  &trans        &trans       &trans         &trans         &trans        &trans  &kp LS(LPAR)      &kp LS(RPAR)      &trans  &trans  &trans  &trans
-			&trans        &trans       &trans         &trans         &trans                &kp LBKT          &kp RBKT          &trans  &trans  &trans  &trans
-			&trans  &trans        &trans                                                                                                       &trans  &trans  &trans
-			&trans         &trans        &trans  &trans            &trans            &trans
-			>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
 		
 		// -----------------------------------------------------------------------------------------
-		// | TRNS  | TRNS | TRNS |  1   |  2   |  3   |       | LS(FSLH) | LS(LPAR) | LS(RPAR) | LS(EQUAL) | LS(QMARK) | TRNS |
-		// | TRNS  | TRNS | TRNS |  4   |  5   |  6   | TRNS  | SQT      | TRNS     | TRNS     | TRNS      | TRNS      | TRNS |
-		// |       | TRNS |  0   |  7   |  8   |  9   |       | PLUS     | MINUS    | EQUAL    | TRNS      | TRNS      | TRNS |
-		// | TRNS  |  F2  |  F3  |      |      |      |       |          |          |          | TRNS      | TRNS      | TRNS |
-		//                      |  0  | MINUS | TRNS |   | TRNS | ENTER | TRNS |
-		num {
+		// | ESC   |     |     |     |     |     |          |  !  |  &  |  $  |  /  |  `     | DEL |
+		// | TAB   |     |     |  }  |  ]  |  )  |   SCROLL | (   |  [  |  {  |  +  |  #     |  ?  |
+		// |       |   ´  |  ¤   |     |  ^  |  @  |          |  ~  |  =  |  ,  |  .  |  PGUP  |  -   |
+		// | SHIFT |  CTRL | € |                                                 | HOME | PGDOWN | END|
+		//                     | ALT | GUI | SPACE |        | SPACE (MEDIA) | LSENTER | SHIFT |
+		sym {
+			display-name = "Symbols";
 			bindings = <
-			&trans  &trans  &trans  &kp N1  &kp N2  &kp N3             &kt LS(FSLH)  &kt LS(LPAR)  &kt LS(RPAR)  &kt LS(EQUAL)  &kt LS(QMARK)  &bt BT_CLR_ALL
-			&trans  &trans  &trans  &kp N4  &kp N5  &kp N6     &trans  &kt SQT       &trans        &trans        &trans         &trans         &trans
-			&trans  &kt N0  &kp N7  &kp N8  &kp N9             &kt PLUS      &kt MINUS     &kt EQUAL     &trans         &trans         &trans
-			&trans  &kt F2  &kt F3                                                                               &trans         &trans         &trans
-			&kp N0  &kt MINUS  &trans  &trans        &kt ENTER     &trans
+			&trans  &trans        &trans          &trans        &trans       &trans                        &kp SV_EXCL  &kp SV_AMPS  &kp SV_DLLR  &kp SV_SLASH  &kp SV_GRAVE &kp DELETE
+			&trans  &trans        &trans          &kp SV_RBRC   &kp SV_RBKT  &kp SV_RPAR           &trans  &lpar_td &lbkt_td  &lbrc_td  &kp SV_PLUS  &kp SV_HASH  &kp SV_QMARK
+			&trans  &kp SV_ACUTE  &kp SV_CURREN   &kp SV_CARET  &at_gmail_td &tilde_home_td                &kp SV_EQUAL &trans &trans &trans  &kp PAGE_UP  &trans
+			&trans  &trans  &kp SV_EURO                                                                               &kp HOME  &kp PAGE_DOWN  &kp END
+			&trans  &trans  &trans                                                                         &lt 3 SPACE  &trans  &trans
 			>;
+			
+			sensor-bindings = <&encoder_scroll>;
+		};
+		
+		// -----------------------------------------------------------------------------------------
+		// | ESC |  	|  |  1   |  2   |  3   |       	|  |  |  |  | "|" | DEL  |
+		// | TAB | <  | > |			  4   |  5   |  6   | SCROLL  |   |      |  *  |   +    |   #    | ? |
+		// |     |    |  0  |  7   |  8   |  9   |       	| % | = | , | . | UP | - |
+		// | SHIFT    CTRL | § |      | | | |
+		//                     | ALT | GUI | SPACE (MEDIA) |        | SPACE | LSENTER | SHIFT |
+		num {
+			display-name = "Numbers";
+			bindings = <
+			&trans  &trans           &trans                &kp SV_N1  &kp SV_N2  &kp SV_N3             &trans            &trans           &trans         &kp SV_PIPE  &trans  	   &kp DELETE
+			&trans  &macro_open_croc &macro_close_croc     &kp SV_N4  &kp SV_N5  &kp SV_N6     &trans  &trans            &trans           &kp SV_STAR    &kp SV_PLUS  &kp SV_HASH  &kp SV_QMARK
+			&trans                   &kt SV_N0             &kp SV_N7  &kp SV_N8  &kp SV_N9             &kp SV_PRCNT      &kp SV_EQUAL     &trans         &trans       &trans       &trans
+			&trans  &trans     &kp SV_SECT                                                             &trans  &trans  &trans
+			&trans  &trans     &lt 3 SPACE                                                             &trans &trans &trans
+			>;
+			
+			sensor-bindings = <&encoder_scroll_alt>;
 		};
 		
 		// -----------------------------------------------------------------------------------------
 		// | ESC   |  NO  |  NO  |  NO  |  NO  |  NO  |   | PREV | PLAY | NEXT | MUTE | VOL- | VOL+ |
 		// | TAB   |  NO  | CTRL | CMD  | ALT  |  NO  |   | LEFT |  UP  | DOWN | RIGHT |  NO  |  NO  |
 		// | SHIFT |  NO  |  NO  |  NO  |  NO  | CAPS |   | SPACE | LEFT |  NO  | RIGHT |  NO  |  NO  |
-		//                    | CMD | NO | NO |   | NO | NO | ENTER |
+		//                    | NO | NO | NO |   | NO | NO | NO |
 		media {
 			display-name = "Media";
 			bindings = <
-			&trans &none &none &none &none &none &kp C_PREV &kp C_PLAY &kp C_NEXT &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP
-			&trans &none &kp LCTRL &kp LGUI &kp LALT &none &kp LEFT &kp UP &kp DOWN &kp RIGHT &none &none
-			&trans &none &none &none &none &kp CAPS &kp SPACE &kp LEFT &none &kp RIGHT &none &none
-			&trans &none &none &none &none &trans
-			&none  &none  &none
+			&trans &bt BT_SEL 0 &bt BT_SEL 1   &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4              &kp C_PREV &kp C_PLAY &kp C_NEXT &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP
+			&trans &trans       &trans         &trans       &trans       &trans          &trans    &trans     &trans     &trans     &trans       &trans       &trans
+			&trans              &trans         &none        &none        &kp CAPS 			           &kp SPACE  &trans     &trans     &trans       &trans       &trans
+			&trans &bt BT_CLR   &bt BT_CLR_ALL                                                                                      &bt BT_PRV   &none        &bt BT_NXT
+			&trans &trans       &trans                                                             &trans &trans &trans
 			>;
 		};
 		

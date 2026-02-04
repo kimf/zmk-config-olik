@@ -251,7 +251,7 @@
 			bindings = <
 			&trans  &trans           			 &trans           &kp SV_N1  &kp SV_N2  &kp SV_N3             &trans            &trans           &trans         &kp LA(SV_N7)  &trans  	   &kp DELETE
 			&trans  &open_croc_td 				 &close_croc_td   &kp SV_N4  &kp SV_N5  &kp SV_N6     &trans  &trans            &trans           &kp SV_STAR    &kp SV_PLUS  &kp SV_HASH  &kp SV_QMARK
-			&trans                         &kt SV_N0        &kp SV_N7  &kp SV_N8  &kp SV_N9             &kp SV_PRCNT      &kp SV_EQUAL     &trans         &trans       &trans       &trans
+			&trans                         &kp	 SV_N0        &kp SV_N7  &kp SV_N8  &kp SV_N9             &kp SV_PRCNT      &kp SV_EQUAL     &trans         &trans       &trans       &trans
 			&trans  &trans     &kp SV_SECT                                                             &trans  &trans  &trans
 			&trans  &trans     &lt 3 SPACE                                                             &trans &trans &trans
 			>;

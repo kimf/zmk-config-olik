@@ -33,7 +33,6 @@
 			bindings = <&kp SV_TILDE>, <&macro_tilde_home>;
 		};
 		
-		
 		open_croc_td: open_croc_td {
 			compatible = "zmk,behavior-tap-dance";
 			#binding-cells = <0>;

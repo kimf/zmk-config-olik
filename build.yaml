@@ -21,7 +21,7 @@
 include:
 
   - board: nice_nano_v2
-    shield: olik_left nice_oled
+    shield: olik_left
 
   - board: nice_nano_v2
     shield: olik_right

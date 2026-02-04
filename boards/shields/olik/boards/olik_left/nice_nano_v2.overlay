@@ -31,7 +31,8 @@
 &i2c1 {
 	compatible = "nordic,nrf-twim";
 	status = "okay";
-	zephyr,concat-buf-size = <256>;
+	// SSD1306 requires larger buffer.
+	zephyr,concat-buf-size = <1024>;
 	pinctrl-0 = <&i2c1_default>;
 	pinctrl-1 = <&i2c1_sleep>;
 	pinctrl-names = "default", "sleep";
@@ -45,13 +46,14 @@
 		compatible = "solomon,ssd1306fb";
 		reg = <0x3c>;
 		width = <128>;
-		height = <64>;
+		height = <32>;
 		segment-offset = <0>;
 		page-offset = <0>;
 		display-offset = <0>;
-		multiplex-ratio = <63>;
+		multiplex-ratio = <31>;
 		segment-remap;
 		com-invdir;
+		com-sequential;
 		inversion-on;
 		prechargep = <0x22>;
 	};

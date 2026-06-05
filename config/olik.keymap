@@ -218,17 +218,17 @@
 		};
 
 		combo_fransman {
-			/* F + G => Fransman. */
+			/* S + D + F => Fransman. */
 			timeout-ms = <40>;
-			key-positions = <16 17>;
+			key-positions = <14 15 16>;
 			bindings = <&macro_fransman>;
 			layers = <0>;
 		};
 
 		combo_ellinore {
-			/* E + R => Ellinore. */
+			/* W + E + R => Ellinore. */
 			timeout-ms = <40>;
-			key-positions = <3 4>;
+			key-positions = <2 3 4>;
 			bindings = <&macro_ellinore>;
 			layers = <0>;
 		};

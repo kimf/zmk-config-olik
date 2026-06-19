@@ -16,5 +16,7 @@ manifest:
     - name: zmk-locales
       remote: joelspadin
       revision: main
+    - name: zmk-overrides
+      url: file:../zmk-overrides
   self:
     path: config

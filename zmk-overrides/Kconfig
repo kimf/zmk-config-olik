@@ -1,0 +1,9 @@
+menu "ZMK Olik Overrides"
+
+config ZMK_WIDGET_PERIPHERAL_BATTERY_STATUS
+    bool "Widget for peripheral battery charge information"
+    depends on ZMK_SPLIT && ZMK_SPLIT_ROLE_CENTRAL
+    depends on ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
+    select LV_USE_LABEL
+
+endmenu
